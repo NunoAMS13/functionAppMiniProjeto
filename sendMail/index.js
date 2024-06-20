@@ -1,0 +1,62 @@
+module.exports = async function (context, myTimer) {
+	
+const { CosmosClient } = require("@azure/cosmos");
+const nodemailer = require("nodemailer");
+
+    const connectionString = "https://miniprojeto2324.documents.azure.com:443/";
+	const key = "pAgVvxyfsCNiSzadPsV7FtGy5G9No3u26EkXO8rYAI9hRyBx3MflQTEUl0cMf0MSab6ePjSjemdNACDb5DU9HA==";
+    const databaseId = "MiniProjeto";
+    const containerId = "Receitas";
+	
+	const email = "miniprojcn@gmail.com";
+	const password = "Miniprojeto2024";
+	const emailTo = "silva.nuno@ipcbcampus.pt";
+
+	const client = new CosmosClient({ endpoint, key });
+    const database = client.database(databaseId);
+    const container = database.container(containerId);
+
+    // Obter receitas da Cosmos DB
+    const { resources: receitas } = await container.items.readAll().fetchAll();
+
+    if (receitas.length > 0) {
+        // Selecionar uma receita aleatória
+        const receita = receitas[Math.floor(Math.random() * receitas.length)];
+
+        // Configurar o transportador de e-mail
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: email
+                pass: password
+            }
+        });
+
+        // Configurar o e-mail
+        const mailOptions = {
+            from: email,
+            to: emailTo,
+            subject: `Receita do Dia: ${receita.nome}`,
+            html: `
+                <h1>${receita.nome}</h1>
+                <p>${receita.descricao}</p>
+                <img src="${receita.imagem}" alt="${receita.nome}">
+                <h3>Ingredientes:</h3>
+                <ul>
+                    ${receita.ingredientes.map(ing => `<li>${ing.nome}: ${ing.quantidade}</li>`).join('')}
+                </ul>
+                <h3>Preparação:</h3>
+                <ol>
+                    ${receita.preparacao.map(step => `<li>${step}</li>`).join('')}
+                </ol>
+            `
+        };
+
+        // Enviar o e-mail
+        await transporter.sendMail(mailOptions);
+        context.log('E-mail enviado com sucesso.');
+    } else {
+        context.log('Nenhuma receita encontrada.');
+    }
+};
+

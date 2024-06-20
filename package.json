@@ -1,0 +1,13 @@
+{
+  "name": "teste_v3",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "func start",
+    "test": "echo \"No tests yet...\""
+  },
+  "dependencies": {
+    "@azure/cosmos": "4.0.0"},
+    "muller": "^1.0.0",
+  "devDependencies": {}
+}
