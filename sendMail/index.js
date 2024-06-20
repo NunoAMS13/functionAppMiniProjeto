@@ -1,21 +1,20 @@
 module.exports = async function (context, myTimer) {
-	
-const { CosmosClient } = require("@azure/cosmos");
-const nodemailer = require("nodemailer");
+    const { CosmosClient } = require("@azure/cosmos");
+    const nodemailer = require("nodemailer");
 
     const connectionString = "https://miniprojeto2324.documents.azure.com:443/";
-	const key = "pAgVvxyfsCNiSzadPsV7FtGy5G9No3u26EkXO8rYAI9hRyBx3MflQTEUl0cMf0MSab6ePjSjemdNACDb5DU9HA==";
+    const key = "pAgVvxyfsCNiSzadPsV7FtGy5G9No3u26EkXO8rYAI9hRyBx3MflQTEUl0cMf0MSab6ePjSjemdNACDb5DU9HA==";
     const databaseId = "MiniProjeto";
     const containerId = "Receitas";
-	
-	const email = "miniprojcn@gmail.com";
-	const password = "Miniprojeto2024";
-	const emailTo = "silva.nuno@ipcbcampus.pt";
 
-	const client = new CosmosClient({ endpoint, key });
+    const email = "miniprojcn@gmail.com";
+    const password = "Miniprojeto2024";
+    const emailTo = "silva.nuno@ipcbcampus.pt";
+
+    const client = new CosmosClient({ endpoint: connectionString, key });
     const database = client.database(databaseId);
     const container = database.container(containerId);
-	console.log('a funcionar');
+    console.log('a funcionar');
 
     // Obter receitas da Cosmos DB
     const { resources: receitas } = await container.items.readAll().fetchAll();
@@ -28,7 +27,7 @@ const nodemailer = require("nodemailer");
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
-                user: email
+                user: email,
                 pass: password
             }
         });
@@ -60,4 +59,3 @@ const nodemailer = require("nodemailer");
         context.log('Nenhuma receita encontrada.');
     }
 };
-
