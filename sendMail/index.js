@@ -15,6 +15,7 @@ const nodemailer = require("nodemailer");
 	const client = new CosmosClient({ endpoint, key });
     const database = client.database(databaseId);
     const container = database.container(containerId);
+	console.log('a funcionar');
 
     // Obter receitas da Cosmos DB
     const { resources: receitas } = await container.items.readAll().fetchAll();
