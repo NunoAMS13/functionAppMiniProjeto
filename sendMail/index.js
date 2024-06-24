@@ -3,12 +3,12 @@ module.exports = async function (context, myTimer) {
     const nodemailer = require("nodemailer");
 
     const connectionString = "https://miniprojeto2324.documents.azure.com:443/";
-    const key = "pAgVvxyfsCNiSzadPsV7FtGy5G9No3u26EkXO8rYAI9hRyBx3MflQTEUl0cMf0MSab6ePjSjemdNACDb5DU9HA==";
+    const key = "qdE7xj1KI1eN3rp60eKelTu9ghdv5HRH2WRi0Nla9powRJbz4BgL2Os8EmW4ucwQuoKCmxVMAm6TACDbWWCyVQ==";
     const databaseId = "MiniProjeto";
     const containerId = "Receitas";
 
     const email = "miniprojcn@gmail.com";
-    const password = "Miniprojeto2024";
+    const password = "hncd eusl ushr erae";
     const emailTo = "silva.nuno@ipcbcampus.pt";
 
     const client = new CosmosClient({ endpoint: connectionString, key });
