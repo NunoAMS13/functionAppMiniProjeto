@@ -3,7 +3,7 @@ module.exports = async function (context, myTimer) {
     const nodemailer = require("nodemailer");
 
     const connectionString = "https://miniprojeto2324.documents.azure.com:443/";
-    const key = "qdE7xj1KI1eN3rp60eKelTu9ghdv5HRH2WRi0Nla9powRJbz4BgL2Os8EmW4ucwQuoKCmxVMAm6TACDbWWCyVQ==";
+    const key = "TgDfk5R2zuCevwkvEmQxptWyXqm3MIywLSKuZ4OMW5gufa28vCDVsE3wu8QCcM0QYavihKvSsGxGACDbbG4sEQ==";
     const databaseId = "MiniProjeto";
     const containerId = "Receitas";
 
